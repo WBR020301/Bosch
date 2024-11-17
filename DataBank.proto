@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package Simulation.Data;
+
+message EventData{
+ string type=1;
+ bytes payload=2;
+}
+
+message FrameData{
+  int32 frameID = 1;
+  //trackBoxs:动态障碍物
+  repeated TrackBox trackBoxs= 2;
+  //lans:车道线
+  repeated Lane lans= 3;
+  int32 speed = 4;
+}
+
+message FreeSpaceRoadBound{
+  //boundData 道路区域 256*256*3二值化图像
+  bytes boundData = 1;
+}
+
+message PointCloudV3Data{
+  //pointClouds:点云
+  repeated PointCloudV3 pointClouds= 1;
+}
+
+message TrafficLightInfo{
+  //lightInfo:红绿灯
+  repeated TrafficLight lightInfo = 1;
+}
+
+message PointV3{
+ float x = 1;
+ float y = 2;
+ float z= 3;
+}
+message PointV2{
+ float x = 1;
+ float y = 2;
+}
+message PointCloudV3{
+  PointV3 coord= 1;
+  int32 type = 2;
+}
+
+message TrackBox{
+  int32 objID= 1;
+  int32 type= 2;
+  PointV3 centerPos= 3;
+  float heading= 4;
+  float length= 5;
+  float width= 6;
+  float height= 7;
+}
+
+message Lane{
+  int32 type = 1;
+  repeated PointV2 points = 2;
+}
+
+message VehicleInfo{
+  int32 speed = 1;
+  float heading = 2;
+  PointV3 VehicleWorldCoordinates= 3;
+}
+
+message TrafficLight{
+  int32 status = 1;
+  float x = 2;
+  float y = 3;
+  float z = 4;
+}
